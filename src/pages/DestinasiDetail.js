@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const DestinasiDetail = () => {
   const [destinasi, setDestinasi] = useState(null);
@@ -11,6 +12,7 @@ const DestinasiDetail = () => {
     komentar: ''
   });
   const { id } = useParams();
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     getDestinasiById();
@@ -60,6 +62,15 @@ const DestinasiDetail = () => {
     });
   };
 
+  const handleAddFavorit = () => {
+    if (!currentUser) {
+      alert('Silakan login terlebih dahulu untuk menambahkan ke favorit');
+      return;
+    }
+    // Implementasi API untuk menambahkan ke favorit
+    alert('Fitur favorit belum diimplementasikan');
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -93,9 +104,15 @@ const DestinasiDetail = () => {
           <div className="mb-3">
             <strong>Harga Tiket:</strong> {destinasi.harga_tiket}
           </div>
-          <button className="btn btn-outline-primary me-2">
-            <i className="bi bi-heart"></i> Tambah ke Favorit
-          </button>
+          {currentUser ? (
+            <button className="btn btn-outline-primary me-2" onClick={handleAddFavorit}>
+              <i className="bi bi-heart"></i> Tambah ke Favorit
+            </button>
+          ) : (
+            <Link to="/login" className="btn btn-outline-primary me-2">
+              <i className="bi bi-heart"></i> Tambah ke Favorit
+            </Link>
+          )}
           <button className="btn btn-outline-secondary">
             <i className="bi bi-share"></i> Bagikan
           </button>
@@ -137,42 +154,59 @@ const DestinasiDetail = () => {
         <p>Belum ada ulasan untuk destinasi ini.</p>
       )}
 
-      <div className="card mt-4">
-        <div className="card-header">
-          Tambahkan Ulasan
+      {currentUser ? (
+        <div className="card mt-4">
+          <div className="card-header">
+            Tambahkan Ulasan
+          </div>
+          <div className="card-body">
+            <form onSubmit={submitUlasan}>
+              <div className="mb-3">
+                <label className="form-label">Penilaian</label>
+                <select 
+                  className="form-select" 
+                  name="penilaian" 
+                  value={newUlasan.penilaian}
+                  onChange={handleInputChange}
+                >
+                  <option value="5">5 - Sangat Bagus</option>
+                  <option value="4">4 - Bagus</option>
+                  <option value="3">3 - Cukup</option>
+                  <option value="2">2 - Kurang</option>
+                  <option value="1">1 - Sangat Kurang</option>
+                </select>
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Komentar</label>
+                <textarea 
+                  className="form-control" 
+                  name="komentar" 
+                  rows="3" 
+                  value={newUlasan.komentar}
+                  onChange={handleInputChange}
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" className="btn btn-primary">Kirim Ulasan</button>
+            </form>
+          </div>
         </div>
-        <div className="card-body">
-          <form onSubmit={submitUlasan}>
-            <div className="mb-3">
-              <label className="form-label">Penilaian</label>
-              <select 
-                className="form-select" 
-                name="penilaian" 
-                value={newUlasan.penilaian}
-                onChange={handleInputChange}
-              >
-                <option value="5">5 - Sangat Bagus</option>
-                <option value="4">4 - Bagus</option>
-                <option value="3">3 - Cukup</option>
-                <option value="2">2 - Kurang</option>
-                <option value="1">1 - Sangat Kurang</option>
-              </select>
+      ) : (
+        <div className="card mt-4">
+          <div className="card-body text-center">
+            <h5 className="card-title">Ingin memberikan ulasan?</h5>
+            <p className="card-text">Silakan login atau daftar terlebih dahulu untuk memberikan ulasan pada destinasi ini.</p>
+            <div className="d-flex justify-content-center gap-2">
+              <Link to="/login" className="btn btn-primary">
+                <i className="bi bi-box-arrow-in-right me-1"></i> Login
+              </Link>
+              <Link to="/register" className="btn btn-outline-primary">
+                <i className="bi bi-person-plus me-1"></i> Daftar
+              </Link>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Komentar</label>
-              <textarea 
-                className="form-control" 
-                name="komentar" 
-                rows="3" 
-                value={newUlasan.komentar}
-                onChange={handleInputChange}
-                required
-              ></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Kirim Ulasan</button>
-          </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
