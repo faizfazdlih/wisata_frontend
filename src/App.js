@@ -42,14 +42,21 @@ const AdminRoute = ({ children }) => {
 };
 
 // Conditional Navbar Component
+// Conditional Navbar Component
 const ConditionalNavbar = () => {
   const location = useLocation();
-  // Jangan tampilkan navbar umum jika berada di halaman admin
-  if (location.pathname.startsWith('/admin')) {
+  const hiddenPaths = ['/login', '/register'];
+
+  if (
+    location.pathname.startsWith('/admin') ||
+    hiddenPaths.includes(location.pathname)
+  ) {
     return null;
   }
+
   return <Navbar />;
 };
+
 
 function App() {
   return (
