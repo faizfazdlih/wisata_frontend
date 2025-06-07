@@ -65,16 +65,16 @@ const UserUlasan = () => {
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header Section */}
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-8">
-          <div className="bg-green-600 px-8 py-12">
+          <div className="bg-nature-500 px-8 py-12">
             <div className="flex items-center space-x-6">
               <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
-                <svg className="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-10 h-10 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
               <div className="text-white">
                 <h1 className="text-4xl font-bold mb-2">Ulasan Saya</h1>
-                <p className="text-green-100 text-lg">Lihat dan kelola semua ulasan yang telah Anda berikan</p>
+                <p className="text-nature-100 text-lg">Lihat dan kelola semua ulasan yang telah Anda berikan</p>
               </div>
             </div>
           </div>
@@ -84,14 +84,14 @@ const UserUlasan = () => {
         {message.text && (
           <div className={`mb-8 p-4 rounded-2xl shadow-lg flex items-center space-x-3 ${
             message.type === 'success' 
-              ? 'bg-green-50 border-2 border-green-200 text-green-800' 
+              ? 'bg-nature-50 border-2 border-nature-200 text-nature-800' 
               : 'bg-red-50 border-2 border-red-200 text-red-800'
           }`}>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-              message.type === 'success' ? 'bg-green-200' : 'bg-red-200'
+              message.type === 'success' ? 'bg-nature-200' : 'bg-red-200'
             }`}>
               {message.type === 'success' ? (
-                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-nature-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               ) : (
@@ -108,7 +108,7 @@ const UserUlasan = () => {
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
           <div className="border-b border-gray-100 px-8 py-6">
             <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-              <svg className="w-7 h-7 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-7 h-7 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
               Daftar Ulasan Anda
@@ -118,13 +118,13 @@ const UserUlasan = () => {
           <div className="p-8">
             {loading ? (
               <div className="text-center py-16">
-                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mb-4"></div>
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-nature-600 mb-4"></div>
                 <p className="text-gray-600 text-lg">Memuat ulasan Anda...</p>
               </div>
             ) : ulasan.length > 0 ? (
               <div className="space-y-6">
                 {ulasan.map((item) => (
-                  <div key={item.id_ulasan} className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-100 hover:border-green-200 transition-all duration-300 hover:shadow-lg">
+                  <div key={item.id_ulasan} className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-100 hover:border-nature-500 transition-all duration-300 hover:shadow-lg">
                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between space-y-4 lg:space-y-0">
                       {/* Content Section */}
                       <div className="flex-1 lg:pr-6">
@@ -135,15 +135,13 @@ const UserUlasan = () => {
                           </div>
                         </div>
                         
-                        <div className="bg-white rounded-xl p-4 mb-4 border-l-4 border-green-600">
+                        <div className="bg-white rounded-xl p-4 mb-4 border-l-4 border-nature-600">
                           <p className="text-gray-700 leading-relaxed italic">"{item.komentar}"</p>
                         </div>
                         
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                           <div className="flex items-center text-gray-500 text-sm">
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 8h6M3 21h18M3 10h18" />
-                            </svg>
+                          <i className="fa-regular fa-clock mr-2"></i>
                             {new Date(item.tanggal_ulasan).toLocaleDateString('id-ID', {
                               year: 'numeric',
                               month: 'long',
@@ -192,7 +190,7 @@ const UserUlasan = () => {
                 </p>
                 <Link 
                   to="/destinasi" 
-                  className="inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+                  className="inline-flex items-center px-8 py-4 bg-nature-600 hover:bg-nature-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
                 >
                   <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />

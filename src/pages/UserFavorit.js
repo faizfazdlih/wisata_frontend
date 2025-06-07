@@ -91,10 +91,10 @@ const UserFavorit = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <div className="bg-emerald-500 p-8">
+            <div className="bg-nature-500 p-8">
               <div className="flex items-center">
                 <div className="bg-white rounded-full p-4 mr-6 shadow-lg">
-                  <svg className="w-8 h-8 text-emerald-500 fill-current" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 text-red-500 fill-current" viewBox="0 0 24 24">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                   </svg>
                 </div>
@@ -133,7 +133,7 @@ const UserFavorit = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="border-b border-gray-100 p-6">
             <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-              <svg className="w-6 h-6 text-emerald-500 fill-current mr-3" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-red-500 fill-current mr-3" viewBox="0 0 24 24">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
               </svg>
               Destinasi Favorit Saya
@@ -161,7 +161,7 @@ const UserFavorit = () => {
                           }}
                         />
                         <div className="absolute top-3 right-3">
-                          <div className="bg-emerald-500 text-white px-2 py-1 rounded-full shadow-lg">
+                          <div className="bg-white text-red-500 px-2 py-1 rounded-full shadow-lg">
                             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                             </svg>
@@ -177,7 +177,7 @@ const UserFavorit = () => {
                               <small className="font-medium">Indonesia</small>
                             </div>
                             {getNamaKategori(item) && (
-                              <span className="bg-emerald-500 px-3 py-1 rounded-full text-xs font-semibold">
+                              <span className="bg-nature-500 px-3 py-1 rounded-full text-xs font-semibold">
                                 {getNamaKategori(item)}
                               </span>
                             )}
@@ -186,7 +186,7 @@ const UserFavorit = () => {
                       </div>
                       
                       <div className="p-5">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-emerald-600 transition-colors">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-nature-600 transition-colors">
                           {getNamaDestinasi(item)}
                         </h3>
                         
@@ -210,7 +210,7 @@ const UserFavorit = () => {
                         <div className="flex gap-3">
                           <Link 
                             to={`/destinasi/${item.id_destinasi}`} 
-                            className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 flex items-center justify-center no-underline transform hover:scale-105"
+                            className="flex-1 bg-nature-500 hover:bg-nature-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 flex items-center justify-center no-underline transform hover:scale-105"
                           >
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
