@@ -45,6 +45,16 @@ const Navbar = () => {
     navigate('/dashboard');
   };
 
+  const handleUlasan = () => {
+    setIsProfileOpen(false);
+    navigate('/dashboard/ulasan');
+  };
+
+  const handleFavorit = () => {
+    setIsProfileOpen(false);
+    navigate('/dashboard/favorit');
+  };
+
   // Close profile dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -237,6 +247,20 @@ const Navbar = () => {
                         <i className="fa-solid fa-user text-sm"></i>
                         <span>Dashboard</span>
                       </button>
+                      <button
+                        onClick={handleUlasan}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-nature-500 hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
+                      >
+                        <i className="fa-solid fa-star text-sm"></i>
+                        <span>Ulasan Saya</span>
+                      </button>
+                      <button
+                        onClick={handleFavorit}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-nature-500 hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
+                      >
+                        <i className="fa-solid fa-heart text-sm"></i>
+                        <span>Favorit Saya</span>
+                      </button>
                       <div className="border-t border-gray-200 my-1"></div>
                       <button
                         onClick={() => setShowLogoutModal(true)}
@@ -321,6 +345,26 @@ const Navbar = () => {
                         title="Dashboard"
                       >
                         <i className="fa-solid fa-user text-sm"></i>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          handleUlasan();
+                        }}
+                        className="p-2 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+                        title="Ulasan Saya"
+                      >
+                        <i className="fa-solid fa-star text-sm"></i>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          handleFavorit();
+                        }}
+                        className="p-2 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+                        title="Favorit Saya"
+                      >
+                        <i className="fa-solid fa-heart text-sm"></i>
                       </button>
                       <button
                         onClick={() => {

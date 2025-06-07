@@ -28,7 +28,7 @@ const Home = () => {
         <div            
           className="absolute inset-0 w-full h-full"           
           style={{             
-            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.85) 0%, rgba(101, 163, 13, 0.85) 50%, rgba(255, 255, 255, 0.9) 100%), url("https://images.unsplash.com/photo-1550664255-94d114340500?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover',             
+            background: 'linear-gradient(135deg, rgba(74, 107, 74, 0.85) 0%, rgba(120, 142, 89, 0.85) 50%, rgba(221, 221, 221, 0.85) 100%), url("https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover',             
             minHeight: '100vh'           
           }}         
         />
@@ -46,27 +46,26 @@ const Home = () => {
               <div className="text-white py-20">
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                   Jelajahi Keindahan
-                  <span className="block text-nature-700">Wisata Indonesia</span>
+                  <span className="block text-nature-200">Wisata Indonesia</span>
                 </h1>
                 
                 <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed max-w-2xl">
                   Temukan destinasi wisata lokal terbaik di Indonesia dengan panduan lengkap, 
                   ulasan terpercaya, dan pengalaman tak terlupakan yang menanti Anda.
                 </p>
-                
                 <div className="flex flex-wrap gap-4 mb-8">
                   <Link 
                     to="/destinasi" 
-                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
+                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
                   >
-                    <i className="fa-solid fa-compass"></i>
+                    <i className="fa-solid fa-compass text-yellow-400"></i>
                     <span>Jelajahi Sekarang</span>
                   </Link>
                   <Link 
                     to="/kategori" 
-                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
+                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
                   >
-                    <i className="fa-solid fa-list"></i>
+                    <i className="fa-solid fa-list text-yellow-400"></i>
                     <span>Lihat Kategori</span>
                   </Link>
                 </div>
@@ -198,6 +197,14 @@ const Home = () => {
                       {item.deskripsi ? item.deskripsi.substring(0, 120) + '...' : 'Destinasi wisata yang menakjubkan dengan pemandangan indah dan pengalaman tak terlupakan yang akan selalu dikenang.'}
                     </p>
                     <div className="flex justify-between items-center">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <i key={i} className="fa-solid fa-star text-yellow-500 text-sm"></i>
+                          ))}
+                        </div>
+                        <small className="text-gray-500 font-medium">(4.8)</small>
+                      </div>
                       <Link 
                         to={`/destinasi/${item.id_destinasi}`} 
                         className="bg-nature-500 hover:bg-nature-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center space-x-1 no-underline"

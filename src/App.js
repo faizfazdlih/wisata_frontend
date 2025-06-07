@@ -15,6 +15,8 @@ import KategoriList from './pages/KategoriList';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import UserUlasan from './pages/UserUlasan';
+import UserFavorit from './pages/UserFavorit';
 import AdminRoutes from './routes/AdminRoutes';
 
 // Protected Route Component
@@ -78,6 +80,16 @@ function App() {
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/ulasan" element={
+            <ProtectedRoute>
+              <UserUlasan />
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/favorit" element={
+            <ProtectedRoute>
+              <UserFavorit />
             </ProtectedRoute>
           } />
         </Routes>
