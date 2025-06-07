@@ -4,40 +4,106 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#4F7942" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Katalog Wisata - Jelajahi destinasi wisata lokal terbaik"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              nature: {
+                50: '#f0f9f1',
+                100: '#dcf1e0',
+                200: '#bae3c2',
+                300: '#8ecf9a',
+                400: '#5db46e',
+                500: '#4F7942', /* Forest Green */
+                600: '#3a5c31',
+                700: '#2e4a28',
+                800: '#263b21',
+                900: '#1f301c',
+              },
+              earth: {
+                100: '#f5efe0',
+                200: '#e6d7b8',
+                300: '#d2b990',
+                400: '#c09c69',
+                500: '#8B4513', /* Saddle Brown */
+                600: '#6d3c1f',
+                700: '#5a321a',
+                800: '#462817',
+                900: '#3a2114',
+              },
+              water: {
+                100: '#e0f2fe',
+                200: '#b9e6fe',
+                300: '#7cd4fd',
+                400: '#36bffa',
+                500: '#0284c7',
+                600: '#0369a1',
+                700: '#075985',
+                800: '#0c4a6e',
+                900: '#0c3d5a',
+              },
+            },
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+    
+    <title>Katalog Wisata</title>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        background-color: #f8fafc;
+      }
+      
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Animasi dasar */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+      
+      .animate-slide-up {
+        animation: slideUp 0.5s ease-out;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

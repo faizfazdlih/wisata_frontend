@@ -208,7 +208,7 @@ const GambarList = () => {
             </div>
 
             <div className="mt-3">
-                <Link to="/dashboard" className="btn btn-secondary">
+                <Link to="/admin" className="btn btn-secondary">
                     <i className="bi bi-arrow-left"></i> Kembali ke Dashboard
                 </Link>
             </div>
