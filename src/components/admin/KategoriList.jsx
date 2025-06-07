@@ -70,9 +70,9 @@ const KategoriList = () => {
             <p className="text-gray-600">Manajemen kategori destinasi wisata</p>
           </div>
           <Link 
-            to="/admin/kategori/tambah" 
-            className="mt-4 md:mt-0 inline-flex items-center px-4 py-2 bg-nature-500 hover:bg-nature-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300 transform hover:scale-105"
-          >
+          to="/admin/kategori/tambah" 
+          className="no-underline mt-4 md:mt-0 inline-flex items-center px-4 py-2 bg-nature-500 hover:bg-nature-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300 transform hover:scale-105"
+        >
             <i className="fa-solid fa-plus mr-2"></i>
             Tambah Kategori
           </Link>

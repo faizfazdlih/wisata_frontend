@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UlasanList = () => {
   const [ulasan, setUlasan] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState({ text: '', type: '' });
+  const navigate = useNavigate();
 
   // Fetch data ulasan
   const fetchUlasan = async () => {
@@ -13,8 +15,8 @@ const UlasanList = () => {
       const response = await axios.get('http://localhost:5000/api/ulasan');
       setUlasan(response.data);
     } catch (error) {
-      setError('Gagal memuat data ulasan');
       console.error('Error fetching ulasan:', error);
+      setMessage({ text: 'Gagal memuat data ulasan', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -24,19 +26,26 @@ const UlasanList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus ulasan ini?')) {
       try {
-        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        if (!storedUser) {
+          setMessage({ text: 'Anda harus login untuk melakukan aksi ini', type: 'error' });
+          return;
+        }
+        
+        const user = JSON.parse(storedUser);
+        const token = user.token;
+        
         await axios.delete(`http://localhost:5000/api/ulasan/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
         
-        // Refresh data setelah hapus
+        setMessage({ text: 'Ulasan berhasil dihapus', type: 'success' });
         fetchUlasan();
-        alert('Ulasan berhasil dihapus');
       } catch (error) {
         console.error('Error deleting ulasan:', error);
-        alert('Gagal menghapus ulasan');
+        setMessage({ text: 'Gagal menghapus ulasan', type: 'error' });
       }
     }
   };
@@ -60,7 +69,7 @@ const UlasanList = () => {
       stars.push(
         <span 
           key={i} 
-          className={i <= rating ? 'text-warning' : 'text-muted'}
+          className={`text-lg ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
         >
           ★
         </span>
@@ -75,121 +84,138 @@ const UlasanList = () => {
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
+      <div className="min-h-screen bg-gray-50 flex justify-center items-center p-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-nature-200 border-t-nature-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2>Kelola Ulasan</h2>
+    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">Kelola Ulasan</h1>
+            <p className="text-gray-600">Manajemen ulasan dan review destinasi</p>
           </div>
+        </div>
 
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              {error}
+        {/* Message Alert */}
+        {message.text && (
+          <div className={`mb-6 p-4 rounded-lg ${message.type === 'error' ? 'bg-red-50 text-red-800 border-l-4 border-red-500' : 'bg-green-50 text-green-800 border-l-4 border-green-500'}`}>
+            <div className="flex items-center">
+              <i className={`mr-2 ${message.type === 'error' ? 'fa-solid fa-circle-exclamation text-red-500' : 'fa-solid fa-check-circle text-green-500'}`}></i>
+              <span>{message.text}</span>
             </div>
-          )}
+          </div>
+        )}
 
-          <div className="card">
-            <div className="card-body">
-              <div className="table-responsive">
-                <table className="table table-striped table-hover">
-                  <thead className="table-dark">
-                    <tr>
-                      <th>ID</th>
-                      <th>Pengguna</th>
-                      <th>Destinasi</th>
-                      <th>Rating</th>
-                      <th>Komentar</th>
-                      <th>Tanggal</th>
-                      <th>Aksi</th>
+        {/* Content */}
+        {ulasan.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 text-center">
+            <div className="mx-auto w-16 h-16 bg-nature-100 rounded-full flex items-center justify-center mb-4">
+              <i className="fa-solid fa-star text-nature-500 text-xl"></i>
+            </div>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Belum ada ulasan</h3>
+            <p className="text-gray-600 mb-6">
+              Belum ada ulasan dari pengguna untuk destinasi wisata.
+            </p>
+          </div>
+        ) : (
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-nature-500 text-white">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pengguna</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Destinasi</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Rating</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Komentar</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tanggal</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {ulasan.map((item) => (
+                    <tr key={item.id_ulasan} className="hover:bg-gray-50 transition-colors duration-200">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 font-medium">#{item.id_ulasan}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">
+                          {item.pengguna?.nama || 'Unknown'}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          ID: {item.id_pengguna}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">
+                          {item.destinasi?.nama_destinasi || 'Unknown'}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          ID: {item.id_destinasi}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center space-x-2">
+                          <div className="flex">
+                            {renderStars(item.penilaian)}
+                          </div>
+                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+                            {item.penilaian}/5
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-gray-900 max-w-xs">
+                          <div 
+                            className="truncate" 
+                            title={item.komentar}
+                          >
+                            {item.komentar || '-'}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500">
+                          {formatDate(item.tanggal_ulasan)}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <div className="flex items-center justify-center space-x-2">
+                          <button 
+                            onClick={() => handleDelete(item.id_ulasan)}
+                            className="text-red-600 hover:text-red-800 transition-colors duration-200"
+                            title="Hapus ulasan"
+                          >
+                            <i className="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {ulasan.length === 0 ? (
-                      <tr>
-                        <td colSpan="7" className="text-center">
-                          Tidak ada data ulasan
-                        </td>
-                      </tr>
-                    ) : (
-                      ulasan.map((item) => (
-                        <tr key={item.id_ulasan}>
-                          <td>{item.id_ulasan}</td>
-                          <td>
-                            <div>
-                              <strong>{item.pengguna?.nama || 'Unknown'}</strong>
-                              <br />
-                              <small className="text-muted">
-                                ID: {item.id_pengguna}
-                              </small>
-                            </div>
-                          </td>
-                          <td>
-                            <div>
-                              <strong>{item.destinasi?.nama_destinasi || 'Unknown'}</strong>
-                              <br />
-                              <small className="text-muted">
-                                ID: {item.id_destinasi}
-                              </small>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              <span className="me-2">{renderStars(item.penilaian)}</span>
-                              <span className="badge bg-primary">
-                                {item.penilaian}/5
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div 
-                              style={{ 
-                                maxWidth: '300px', 
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                whiteSpace: 'nowrap'
-                              }}
-                              title={item.komentar}
-                            >
-                              {item.komentar || '-'}
-                            </div>
-                          </td>
-                          <td>
-                            <small>{formatDate(item.tanggal_ulasan)}</small>
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-danger btn-sm"
-                              onClick={() => handleDelete(item.id_ulasan)}
-                              title="Hapus ulasan"
-                            >
-                              <i className="fas fa-trash"></i> Hapus
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-6 py-4 border-t border-gray-200">
+              <div className="text-sm text-gray-600">
+                Total: {ulasan.length} ulasan
               </div>
             </div>
           </div>
-
-          {ulasan.length > 0 && (
-            <div className="mt-3">
-              <small className="text-muted">
-                Total: {ulasan.length} ulasan
-              </small>
-            </div>
-          )}
+        )}
+        
+        <div className="mt-6">
+          <button
+            onClick={() => navigate('/admin')}
+            className="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg shadow-sm transition-all duration-300"
+          >
+            <i className="fa-solid fa-arrow-left mr-2"></i>
+            Kembali ke Dashboard
+          </button>
         </div>
       </div>
     </div>

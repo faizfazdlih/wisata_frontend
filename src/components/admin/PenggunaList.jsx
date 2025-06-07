@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const PenggunaList = () => {
   const [pengguna, setPengguna] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState({ text: '', type: '' });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchPengguna();
+  }, []);
 
   // Fetch data pengguna
   const fetchPengguna = async () => {
@@ -13,7 +18,7 @@ const PenggunaList = () => {
       setLoading(true);
       const storedUser = localStorage.getItem('user');
       if (!storedUser) {
-        setError('Token tidak ditemukan');
+        setMessage({ text: 'Token tidak ditemukan', type: 'error' });
         return;
       }
       
@@ -27,8 +32,8 @@ const PenggunaList = () => {
       });
       setPengguna(response.data);
     } catch (error) {
-      setError('Gagal memuat data pengguna');
       console.error('Error fetching pengguna:', error);
+      setMessage({ text: 'Gagal memuat data pengguna', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -40,7 +45,7 @@ const PenggunaList = () => {
       try {
         const storedUser = localStorage.getItem('user');
         if (!storedUser) {
-          alert('Token tidak ditemukan');
+          setMessage({ text: 'Anda harus login untuk melakukan aksi ini', type: 'error' });
           return;
         }
         
@@ -53,12 +58,11 @@ const PenggunaList = () => {
           }
         });
         
-        // Refresh data setelah hapus
+        setMessage({ text: 'Pengguna berhasil dihapus', type: 'success' });
         fetchPengguna();
-        alert('Pengguna berhasil dihapus');
       } catch (error) {
         console.error('Error deleting pengguna:', error);
-        alert('Gagal menghapus pengguna');
+        setMessage({ text: 'Gagal menghapus pengguna', type: 'error' });
       }
     }
   };
@@ -77,111 +81,140 @@ const PenggunaList = () => {
 
   // Get badge class untuk peran
   const getBadgeClass = (peran) => {
-    return peran === 'admin' ? 'bg-danger' : 'bg-primary';
+    return peran === 'admin' 
+      ? 'bg-red-100 text-red-800 border border-red-200' 
+      : 'bg-blue-100 text-blue-800 border border-blue-200';
   };
-
-  useEffect(() => {
-    fetchPengguna();
-  }, []);
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
+      <div className="min-h-screen bg-gray-50 flex justify-center items-center p-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-nature-200 border-t-nature-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2>Kelola Pengguna</h2>
-            <Link to="/admin/pengguna/tambah" className="btn btn-primary">
-              <i className="fas fa-plus"></i> Tambah Pengguna
+    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">Kelola Pengguna</h1>
+            <p className="text-gray-600">Manajemen pengguna sistem</p>
+          </div>
+          <Link 
+            to="/admin/pengguna/tambah" 
+            className="no-underline mt-4 md:mt-0 inline-flex items-center px-4 py-2 bg-nature-500 hover:bg-nature-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300 transform hover:scale-105"
+          >
+            <i className="fa-solid fa-plus mr-2"></i>
+            Tambah Pengguna
+          </Link>
+        </div>
+
+        {/* Message Alert */}
+        {message.text && (
+          <div className={`mb-6 p-4 rounded-lg ${message.type === 'error' ? 'bg-red-50 text-red-800 border-l-4 border-red-500' : 'bg-green-50 text-green-800 border-l-4 border-green-500'}`}>
+            <div className="flex items-center">
+              <i className={`mr-2 ${message.type === 'error' ? 'fa-solid fa-circle-exclamation text-red-500' : 'fa-solid fa-check-circle text-green-500'}`}></i>
+              <span>{message.text}</span>
+            </div>
+          </div>
+        )}
+
+        {/* Content */}
+        {pengguna.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 text-center">
+            <div className="mx-auto w-16 h-16 bg-nature-100 rounded-full flex items-center justify-center mb-4">
+              <i className="fa-solid fa-users text-nature-500 text-xl"></i>
+            </div>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Belum ada pengguna</h3>
+            <p className="text-gray-600 mb-6">
+              Mulai dengan menambahkan pengguna untuk mengakses sistem.
+            </p>
+            <Link 
+              to="/admin/pengguna/tambah" 
+              className="inline-flex items-center px-4 py-2 bg-nature-500 hover:bg-nature-600 text-white font-medium rounded-lg shadow-sm transition-all duration-300"
+            >
+              <i className="fa-solid fa-plus mr-2"></i>
+              Tambah Pengguna Pertama
             </Link>
           </div>
-
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
-          )}
-
-          <div className="card">
-            <div className="card-body">
-              <div className="table-responsive">
-                <table className="table table-striped table-hover">
-                  <thead className="table-dark">
-                    <tr>
-                      <th>ID</th>
-                      <th>Nama</th>
-                      <th>Email</th>
-                      <th>Peran</th>
-                      <th>Tanggal Dibuat</th>
-                      <th>Aksi</th>
+        ) : (
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-nature-500 text-white">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nama</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Peran</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tanggal Dibuat</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {pengguna.map((item) => (
+                    <tr key={item.id_pengguna} className="hover:bg-gray-50 transition-colors duration-200">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 font-medium">#{item.id_pengguna}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{item.nama}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500">{item.email}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getBadgeClass(item.peran)}`}>
+                          {item.peran.toUpperCase()}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500">
+                          {formatDate(item.tanggal_dibuat)}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <div className="flex items-center justify-center space-x-2">
+                          <Link 
+                            to={`/admin/pengguna/edit/${item.id_pengguna}`}
+                            className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                            title="Edit"
+                          >
+                            <i className="fa-solid fa-edit"></i>
+                          </Link>
+                          <button 
+                            onClick={() => handleDelete(item.id_pengguna, item.nama)}
+                            className="text-red-600 hover:text-red-800 transition-colors duration-200"
+                            title="Hapus"
+                          >
+                            <i className="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {pengguna.length === 0 ? (
-                      <tr>
-                        <td colSpan="6" className="text-center">
-                          Tidak ada data pengguna
-                        </td>
-                      </tr>
-                    ) : (
-                      pengguna.map((item) => (
-                        <tr key={item.id_pengguna}>
-                          <td>{item.id_pengguna}</td>
-                          <td>
-                            <strong>{item.nama}</strong>
-                          </td>
-                          <td>{item.email}</td>
-                          <td>
-                            <span className={`badge ${getBadgeClass(item.peran)}`}>
-                              {item.peran.toUpperCase()}
-                            </span>
-                          </td>
-                          <td>
-                            <small>{formatDate(item.tanggal_dibuat)}</small>
-                          </td>
-                          <td>
-                            <div className="btn-group" role="group">
-                              <Link
-                                to={`/admin/pengguna/edit/${item.id_pengguna}`}
-                                className="btn btn-warning btn-sm"
-                                title="Edit pengguna"
-                              >
-                                <i className="fas fa-edit"></i>
-                              </Link>
-                              <button
-                                className="btn btn-danger btn-sm"
-                                onClick={() => handleDelete(item.id_pengguna, item.nama)}
-                                title="Hapus pengguna"
-                              >
-                                <i className="fas fa-trash"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-6 py-4 border-t border-gray-200">
+              <div className="text-sm text-gray-600">
+                Total: {pengguna.length} pengguna
               </div>
             </div>
           </div>
-
-          {pengguna.length > 0 && (
-            <div className="mt-3">
-              <small className="text-muted">
-                Total: {pengguna.length} pengguna
-              </small>
-            </div>
-          )}
+        )}
+        
+        <div className="mt-6">
+          <button
+            onClick={() => navigate('/admin')}
+            className="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg shadow-sm transition-all duration-300"
+          >
+            <i className="fa-solid fa-arrow-left mr-2"></i>
+            Kembali ke Dashboard
+          </button>
         </div>
       </div>
     </div>

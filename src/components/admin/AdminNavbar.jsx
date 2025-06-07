@@ -93,13 +93,127 @@ const AdminNavbar = () => {
             <div className="flex-shrink-0">
               <Link 
                 to="/admin" 
-                className="flex items-center space-x-3 text-nature-500 hover:text-nature-600 transition-colors duration-300"
+                className="flex items-center space-x-3 text-nature-500 hover:text-nature-600 transition-colors duration-300 no-underline"
               >
-                <div className="bg-nature-500 p-2 rounded-lg shadow-lg">
-                  <i className="fa-solid fa-leaf text-white text-lg"></i>
+                <div className="w-10 h-10 flex items-center justify-center">
+                  <svg 
+                    width="40" 
+                    height="40" 
+                    viewBox="0 0 40 40" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-10 h-10"
+                  >
+                    <defs>
+                      <linearGradient id="worldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#3B82F6" />
+                        <stop offset="50%" stopColor="#10B981" />
+                        <stop offset="100%" stopColor="#06B6D4" />
+                      </linearGradient>
+                      <linearGradient id="planeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#F59E0B" />
+                        <stop offset="100%" stopColor="#EF4444" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Globe/World */}
+                    <circle 
+                      cx="20" 
+                      cy="20" 
+                      r="16" 
+                      fill="url(#worldGradient)" 
+                      stroke="#1F2937" 
+                      strokeWidth="1.5"
+                    />
+                    
+                    {/* Continents/Land masses */}
+                    <path 
+                      d="M8 16C8 14 10 12 14 12C16 12 18 14 18 16C18 18 16 20 14 20C12 20 10 18 8 16Z" 
+                      fill="#059669" 
+                      opacity="0.8"
+                    />
+                    <path 
+                      d="M22 14C22 12 24 10 28 10C30 10 32 12 32 14C32 16 30 18 28 18C26 18 24 16 22 14Z" 
+                      fill="#059669" 
+                      opacity="0.8"
+                    />
+                    <path 
+                      d="M12 26C12 24 14 22 18 22C20 22 22 24 22 26C22 28 20 30 18 30C16 30 14 28 12 26Z" 
+                      fill="#059669" 
+                      opacity="0.8"
+                    />
+                    <path 
+                      d="M26 28C26 26 28 24 32 24C34 24 36 26 36 28C36 30 34 32 32 32C30 32 28 30 26 28Z" 
+                      fill="#059669" 
+                      opacity="0.8"
+                    />
+                    
+                    {/* Longitude/Latitude lines */}
+                    <ellipse 
+                      cx="20" 
+                      cy="20" 
+                      rx="16" 
+                      ry="8" 
+                      fill="none" 
+                      stroke="#1F2937" 
+                      strokeWidth="0.5" 
+                      opacity="0.3"
+                    />
+                    <ellipse 
+                      cx="20" 
+                      cy="20" 
+                      rx="8" 
+                      ry="16" 
+                      fill="none" 
+                      stroke="#1F2937" 
+                      strokeWidth="0.5" 
+                      opacity="0.3"
+                    />
+                    <line 
+                      x1="4" 
+                      y1="20" 
+                      x2="36" 
+                      y2="20" 
+                      stroke="#1F2937" 
+                      strokeWidth="0.5" 
+                      opacity="0.3"
+                    />
+                    
+                    {/* Airplane */}
+                    <g transform="translate(28, 8) rotate(45)">
+                      <path 
+                        d="M0 2L8 0L10 2L6 4L8 6L4 8L2 6L0 8L-2 6L2 4L0 2Z" 
+                        fill="url(#planeGradient)" 
+                        stroke="#1F2937" 
+                        strokeWidth="0.8"
+                      />
+                      <circle cx="2" cy="4" r="1" fill="#FFF" opacity="0.8"/>
+                    </g>
+                    
+                    {/* Flight path/trail */}
+                    <path 
+                      d="M10 30Q15 25 20 20Q25 15 30 10" 
+                      fill="none" 
+                      stroke="#F59E0B" 
+                      strokeWidth="1.5" 
+                      strokeDasharray="2,2" 
+                      opacity="0.6"
+                    />
+                    
+                    {/* Location pin */}
+                    <g transform="translate(26, 26)">
+                      <path 
+                        d="M0 0C-2 0 -4 2 -4 4C-4 6 0 10 0 10S4 6 4 4C4 2 2 0 0 0Z" 
+                        fill="#EF4444" 
+                        stroke="#1F2937" 
+                        strokeWidth="0.8"
+                      />
+                      <circle cx="0" cy="4" r="1.5" fill="#FFF"/>
+                    </g>
+                  </svg>
                 </div>
                 <span className="text-xl font-bold text-nature-500">
-                  Travel Admin
+                  ULIN
                 </span>
               </Link>
             </div>
