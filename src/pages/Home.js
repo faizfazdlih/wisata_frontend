@@ -24,82 +24,51 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-section position-relative overflow-hidden">
+      <section className="relative overflow-hidden">
         <div            
-          className="hero-bg position-absolute top-0 start-0 w-100 h-100"           
+          className="absolute inset-0 w-full h-full"           
           style={{             
-            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(147, 197, 253, 0.85) 50%, rgba(255, 255, 255, 0.9) 100%), url("https://images.unsplash.com/photo-1748452478615-6f417bc4d29e?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover',             
+            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.85) 0%, rgba(101, 163, 13, 0.85) 50%, rgba(255, 255, 255, 0.9) 100%), url("https://images.unsplash.com/photo-1550664255-94d114340500?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover',             
             minHeight: '100vh'           
           }}         
-        ></div>
+        />
         
         {/* Floating Elements */}
-        <div className="floating-elements position-absolute w-100 h-100">
-          <div className="floating-circle floating-1"></div>
-          <div className="floating-circle floating-2"></div>
-          <div className="floating-circle floating-3"></div>
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
+          <div className="absolute w-24 h-24 bg-white bg-opacity-10 rounded-full top-1/5 right-1/10 animate-pulse"></div>
+          <div className="absolute w-16 h-16 bg-white bg-opacity-10 rounded-full top-3/5 right-1/5 animate-pulse delay-1000"></div>
+          <div className="absolute w-20 h-20 bg-white bg-opacity-10 rounded-full top-2/5 right-5 animate-pulse delay-2000"></div>
         </div>
         
-        <div className="container position-relative">
-          <div className="row min-vh-100 align-items-center">
-            <div className="col-lg-8 col-xl-7">
-              <div className="hero-content text-white py-5">
-                <h1 className="display-2 fw-bold mb-4 animate-fade-in hero-title">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex items-center min-h-screen">
+            <div className="w-full lg:w-2/3 xl:w-3/5">
+              <div className="text-white py-20">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                   Jelajahi Keindahan
-                  <span className="d-block text-black">Wisata Indonesia</span>
+                  <span className="block text-nature-700">Wisata Indonesia</span>
                 </h1>
                 
-                <p className="lead mb-5 fs-4 opacity-90 hero-description">
+                <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed max-w-2xl">
                   Temukan destinasi wisata lokal terbaik di Indonesia dengan panduan lengkap, 
                   ulasan terpercaya, dan pengalaman tak terlupakan yang menanti Anda.
                 </p>
                 
-                <div className="d-flex flex-wrap gap-3 mb-5 hero-buttons">
+                <div className="flex flex-wrap gap-4 mb-8">
                   <Link 
                     to="/destinasi" 
-                    className="btn btn-cta-primary btn-lg px-5 py-3 fw-semibold"
+                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
                   >
-                    <i className="bi bi-compass me-2"></i>
-                    Jelajahi Sekarang
+                    <i className="fa-solid fa-compass"></i>
+                    <span>Jelajahi Sekarang</span>
                   </Link>
                   <Link 
                     to="/kategori" 
-                    className="btn btn-cta-secondary btn-lg px-5 py-3 fw-semibold"
+                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
                   >
-                    <i className="bi bi-grid-3x3-gap me-2"></i>
-                    Lihat Kategori
+                    <i className="fa-solid fa-list"></i>
+                    <span>Lihat Kategori</span>
                   </Link>
-                </div>
-                
-                {/* Enhanced Stats */}
-                <div className="row text-center mt-5 stats-container">
-                  <div className="col-4">
-                    <div className="stat-item p-3 rounded-4">
-                      <div className="stat-icon mb-2">
-                        <i className="bi bi-geo-alt-fill text-warning fs-4"></i>
-                      </div>
-                      <h3 className="fw-bold mb-1 counter">500+</h3>
-                      <p className="small opacity-75 mb-0">Destinasi Premium</p>
-                    </div>
-                  </div>
-                  <div className="col-4">
-                    <div className="stat-item p-3 rounded-4">
-                      <div className="stat-icon mb-2">
-                        <i className="bi bi-people-fill text-success fs-4"></i>
-                      </div>
-                      <h3 className="fw-bold mb-1 counter">10K+</h3>
-                      <p className="small opacity-75 mb-0">Ulasan Terpercaya</p>
-                    </div>
-                  </div>
-                  <div className="col-4">
-                    <div className="stat-item p-3 rounded-4">
-                      <div className="stat-icon mb-2">
-                        <i className="bi bi-heart-fill text-danger fs-4"></i>
-                      </div>
-                      <h3 className="fw-bold mb-1 counter">25K+</h3>
-                      <p className="small opacity-75 mb-0">Pengunjung Puas</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -107,152 +76,135 @@ const Home = () => {
         </div>
         
         {/* Enhanced Scroll Indicator */}
-        <div className="position-absolute bottom-0 start-50 translate-middle-x mb-4">
-          <div className="scroll-indicator text-white text-center">
-            <small className="d-block mb-2 opacity-75 fw-medium">Scroll untuk melihat lebih banyak</small>
-            <div className="scroll-arrow">
-              <i className="bi bi-chevron-down fs-3 animate-bounce"></i>
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6">
+          <div className="text-white text-center">
+            <small className="block mb-2 opacity-75 font-medium">Scroll untuk melihat lebih banyak</small>
+            <div className="animate-bounce">
+              <i className="fa-solid fa-chevron-down text-2xl"></i>
             </div>
           </div>
         </div>
       </section>
 
       {/* Enhanced Features Section */}
-      <section className="py-6 features-section">
-        <div className="container">
-          <div className="row text-center mb-5">
-            <div className="col-lg-8 mx-auto">
-              <div className="section-badge mb-3">
-                <span className="badge bg-primary bg-opacity-10 text-primary px-4 py-2 rounded-pill fs-6">
-                  Keunggulan Kami
-                </span>
-              </div>
-              <h2 className="display-4 fw-bold mb-4 section-title">Mengapa Memilih Kami?</h2>
-              <p className="lead text-muted fs-5">
-                Platform terpercaya untuk menemukan destinasi wisata terbaik di Indonesia dengan layanan terdepan
-              </p>
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-nature-50 text-nature-600 px-6 py-3 rounded-full text-lg font-medium">
+                Keunggulan Kami
+              </span>
             </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Mengapa Memilih Kami?</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Platform terpercaya untuk menemukan destinasi wisata terbaik di Indonesia dengan layanan terdepan
+            </p>
           </div>
           
-          <div className="row g-4">
-            <div className="col-md-4">
-              <div className="feature-card text-center p-5 h-100 bg-white rounded-4 shadow-hover border border-light">
-                <div className="feature-icon-wrapper mb-4">
-                  <div className="feature-icon-bg bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style={{width: '80px', height: '80px'}}>
-                    <i className="bi bi-geo-alt-fill text-primary fs-2"></i>
-                  </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-nature-50 rounded-full flex items-center justify-center mx-auto">
+                  <i className="fa-solid fa-mountain-sun text-nature-500 text-2xl"></i>
                 </div>
-                <h4 className="fw-bold mb-3 h3">Destinasi Terpilih</h4>
-                <p className="text-muted fs-6 lh-lg">
-                  Kumpulan destinasi wisata terbaik yang telah dikurasi khusus oleh para ahli untuk pengalaman terbaik Anda.
-                </p>
               </div>
+              <h4 className="text-2xl font-bold mb-4 text-gray-900">Destinasi Terpilih</h4>
+              <p className="text-gray-600 leading-relaxed">
+                Kumpulan destinasi wisata terbaik yang telah dikurasi khusus oleh para ahli untuk pengalaman terbaik Anda.
+              </p>
             </div>
             
-            <div className="col-md-4">
-              <div className="feature-card text-center p-5 h-100 bg-white rounded-4 shadow-hover border border-light">
-                <div className="feature-icon-wrapper mb-4">
-                  <div className="feature-icon-bg bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style={{width: '80px', height: '80px'}}>
-                    <i className="bi bi-star-fill text-warning fs-2"></i>
-                  </div>
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-yellow-50 rounded-full flex items-center justify-center mx-auto">
+                  <i className="fa-solid fa-star text-yellow-500 text-2xl"></i>
                 </div>
-                <h4 className="fw-bold mb-3 h3">Ulasan Terpercaya</h4>
-                <p className="text-muted fs-6 lh-lg">
-                  Dapatkan insight mendalam dari pengalaman nyata pengunjung lain untuk membantu perencanaan perjalanan Anda.
-                </p>
               </div>
+              <h4 className="text-2xl font-bold mb-4 text-gray-900">Ulasan Terpercaya</h4>
+              <p className="text-gray-600 leading-relaxed">
+                Dapatkan insight mendalam dari pengalaman nyata pengunjung lain untuk membantu perencanaan perjalanan Anda.
+              </p>
             </div>
             
-            <div className="col-md-4">
-              <div className="feature-card text-center p-5 h-100 bg-white rounded-4 shadow-hover border border-light">
-                <div className="feature-icon-wrapper mb-4">
-                  <div className="feature-icon-bg bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style={{width: '80px', height: '80px'}}>
-                    <i className="bi bi-heart-fill text-danger fs-2"></i>
-                  </div>
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto">
+                  <i className="fa-solid fa-heart text-red-500 text-2xl"></i>
                 </div>
-                <h4 className="fw-bold mb-3 h3">Favorit Personal</h4>
-                <p className="text-muted fs-6 lh-lg">
-                  Simpan destinasi favorit Anda dan buat rencana perjalanan yang sempurna sesuai dengan keinginan hati.
-                </p>
               </div>
+              <h4 className="text-2xl font-bold mb-4 text-gray-900">Favorit Personal</h4>
+              <p className="text-gray-600 leading-relaxed">
+                Simpan destinasi favorit Anda dan buat rencana perjalanan yang sempurna sesuai dengan keinginan hati.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Enhanced Popular Destinations Section */}
-      <section className="py-6 destinations-section bg-light">
-        <div className="container">
-          <div className="row align-items-center mb-5">
-            <div className="col-lg-8">
-              <div className="section-badge mb-3">
-                <span className="badge bg-success bg-opacity-10 text-success px-4 py-2 rounded-pill fs-6">
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
+            <div className="lg:w-2/3">
+              <div className="inline-block mb-4">
+                <span className="bg-nature-50 text-nature-600 px-6 py-3 rounded-full text-lg font-medium">
                   Trending Sekarang
                 </span>
               </div>
-              <h2 className="display-4 fw-bold mb-4 section-title">Destinasi Populer</h2>
-              <p className="lead text-muted fs-5">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Destinasi Populer</h2>
+              <p className="text-xl text-gray-600">
                 Jelajahi destinasi wisata yang paling diminati dan dapatkan inspirasi untuk petualangan Anda selanjutnya.
               </p>
             </div>
-            <div className="col-lg-4 text-lg-end">
-              <Link to="/destinasi" className="btn btn-outline-primary btn-lg px-4 py-3 fw-semibold">
-                Lihat Semua <i className="bi bi-arrow-right ms-2"></i>
+            <div className="mt-8 lg:mt-0">
+              <Link to="/destinasi" className="inline-flex items-center space-x-2 bg-white hover:bg-gray-50 text-nature-500 hover:text-nature-600 border-2 border-nature-500 hover:border-nature-600 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl no-underline">
+                <span>Lihat Semua</span>
+                <i className="fa-solid fa-arrow-right"></i>
               </Link>
             </div>
           </div>
           
           {loading ? (
-            <div className="text-center py-5">
-              <div className="spinner-border text-primary mb-3" role="status" style={{width: '3rem', height: '3rem'}}>
-                <span className="visually-hidden">Loading...</span>
-              </div>
-              <p className="h5 text-muted">Memuat destinasi populer...</p>
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-nature-500 mb-4"></div>
+              <p className="text-xl text-gray-600">Memuat destinasi populer...</p>
             </div>
           ) : (
-            <div className="row g-4">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
               {destinasi.map((item, index) => (
-                <div className="col-lg-4 col-md-6" key={item.id_destinasi}>
-                  <div className="destination-card card border-0 shadow-sm h-100 overflow-hidden rounded-4">
-                    <div className="position-relative overflow-hidden">
-                      <img 
-                        src={item.url_gambar || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'} 
-                        className="card-img-top destination-image" 
-                        alt={item.nama_destinasi} 
-                        style={{ height: '280px', objectFit: 'cover' }}
-                      />
-                      <div className="position-absolute top-0 start-0 m-3">
-                        <span className="badge bg-primary px-3 py-2 rounded-pill fw-semibold">
-                          <i className="bi bi-trophy-fill me-1"></i>
-                          #{index + 1} Populer
-                        </span>
-                      </div>
-                      <div className="card-overlay position-absolute bottom-0 start-0 w-100 p-3">
-                        <div className="d-flex align-items-center text-white">
-                          <i className="bi bi-geo-alt-fill me-2"></i>
-                          <small className="fw-medium">Indonesia</small>
-                        </div>
+                <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100" key={item.id_destinasi}>
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={item.url_gambar || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'} 
+                      className="w-full h-72 object-cover transition-transform duration-300 hover:scale-105" 
+                      alt={item.nama_destinasi} 
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-nature-500 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
+                        <i className="fa-solid fa-trophy"></i>
+                        <span>#{index + 1} Populer</span>
+                      </span>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <div className="flex items-center text-white">
+                        <i className="fa-solid fa-location-dot mr-2"></i>
+                        <small className="font-medium">Indonesia</small>
                       </div>
                     </div>
-                    <div className="card-body p-4">
-                      <h5 className="card-title fw-bold mb-3 h4">{item.nama_destinasi}</h5>
-                      <p className="card-text text-muted mb-4 lh-lg">
-                        {item.deskripsi ? item.deskripsi.substring(0, 120) + '...' : 'Destinasi wisata yang menakjubkan dengan pemandangan indah dan pengalaman tak terlupakan yang akan selalu dikenang.'}
-                      </p>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="rating">
-                          {[...Array(5)].map((_, i) => (
-                            <i key={i} className="bi bi-star-fill text-warning me-1"></i>
-                          ))}
-                          <small className="text-muted ms-2 fw-medium">(4.8)</small>
-                        </div>
-                        <Link 
-                          to={`/destinasi/${item.id_destinasi}`} 
-                          className="btn btn-primary btn-sm px-3 py-2 fw-semibold"
-                        >
-                          Lihat Detail <i className="bi bi-arrow-right ms-1"></i>
-                        </Link>
-                      </div>
+                  </div>
+                  <div className="p-6">
+                    <h5 className="text-xl font-bold mb-3 text-gray-900">{item.nama_destinasi}</h5>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {item.deskripsi ? item.deskripsi.substring(0, 120) + '...' : 'Destinasi wisata yang menakjubkan dengan pemandangan indah dan pengalaman tak terlupakan yang akan selalu dikenang.'}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <Link 
+                        to={`/destinasi/${item.id_destinasi}`} 
+                        className="bg-nature-500 hover:bg-nature-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center space-x-1 no-underline"
+                      >
+                        <span>Lihat Detail</span>
+                        <i className="fa-solid fa-arrow-right"></i>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -263,276 +215,31 @@ const Home = () => {
       </section>
 
       {/* Enhanced CTA Section */}
-      <section className="py-6 cta-section" style={{ background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%)' }}>
-        <div className="container">
-          <div className="row align-items-center text-white">
-            <div className="col-lg-8">
-              <div className="cta-content">
-                <div className="cta-badge mb-3">
-                  <span className="badge bg-white bg-opacity-20 backdrop-blur px-4 py-2 rounded-pill fs-6">
-                    <i className="bi bi-rocket-takeoff-fill text-warning me-2"></i>
-                    Bergabung Sekarang
-                  </span>
-                </div>
-                <h2 className="display-5 fw-bold mb-3">Siap untuk Petualangan Berikutnya?</h2>
-                <p className="lead mb-0 fs-5 opacity-90">
-                  Bergabunglah dengan ribuan traveler lainnya dan mulai jelajahi keindahan Indonesia hari ini juga!
-                </p>
+      <section className="py-20 bg-gradient-to-r from-nature-500 to-nature-600 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between text-white">
+            <div className="lg:w-2/3">
+              <div className="mb-4">
+                <span className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full text-lg font-medium flex items-center space-x-2 inline-flex">
+                  <i className="fa-solid fa-rocket text-yellow-400"></i>
+                  <span>Bergabung Sekarang</span>
+                </span>
               </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">Siap untuk Petualangan Berikutnya?</h2>
+              <p className="text-xl opacity-90">
+                Bergabunglah dengan ribuan traveler lainnya dan mulai jelajahi keindahan Indonesia hari ini juga!
+              </p>
             </div>
-            <div className="col-lg-4 text-lg-end mt-4 mt-lg-0">
-              <Link to="/register" className="btn btn-warning btn-lg px-5 py-3 fw-semibold shadow-lg">
-                <i className="bi bi-person-plus me-2"></i>
-                Daftar Sekarang
+            <div className="mt-8 lg:mt-0">
+              <Link to="/register" className="inline-flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 no-underline">
+                <i className="fa-solid fa-user-plus"></i>
+                <span>Daftar Sekarang</span>
               </Link>
             </div>
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        :root {
-          --primary-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-          --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
-          --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        .py-6 {
-          padding-top: 5rem;
-          padding-bottom: 5rem;
-        }
-        
-        .hero-section {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .floating-elements {
-          pointer-events: none;
-        }
-        
-        .floating-circle {
-          position: absolute;
-          background: rgba(255,255,255,0.1);
-          border-radius: 50%;
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .floating-1 {
-          width: 100px;
-          height: 100px;
-          top: 20%;
-          right: 10%;
-          animation-delay: 0s;
-        }
-        
-        .floating-2 {
-          width: 60px;
-          height: 60px;
-          top: 60%;
-          right: 20%;
-          animation-delay: 2s;
-        }
-        
-        .floating-3 {
-          width: 80px;
-          height: 80px;
-          top: 40%;
-          right: 5%;
-          animation-delay: 4s;
-        }
-        
-        .text-gradient {
-          background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #c2410c 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .hero-title {
-          line-height: 1.1;
-          text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
-        
-        .hero-description {
-          max-width: 600px;
-          line-height: 1.6;
-        }
-        
-        .btn-cta-primary {
-          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-          border: none;
-          color: #1f2937;
-          transition: all 0.3s ease;
-        }
-        
-        .btn-cta-primary:hover {
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-          color: #1f2937;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
-        }
-        
-        .btn-cta-secondary {
-          background: rgba(255,255,255,0.15);
-          border: 2px solid rgba(255,255,255,0.3);
-          color: white;
-          backdrop-filter: blur(10px);
-          transition: all 0.3s ease;
-        }
-        
-        .btn-cta-secondary:hover {
-          background: rgba(255,255,255,0.25);
-          border-color: rgba(255,255,255,0.5);
-          color: white;
-          transform: translateY(-2px);
-        }
-        
-        .stats-container .stat-item {
-          background: rgba(255,255,255,0.15);
-          backdrop-filter: blur(15px);
-          border: 1px solid rgba(255,255,255,0.2);
-          transition: all 0.3s ease;
-        }
-        
-        .stats-container .stat-item:hover {
-          background: rgba(255,255,255,0.25);
-          transform: translateY(-3px);
-        }
-        
-        .section-badge {
-          margin-bottom: 1rem;
-        }
-        
-        .section-title {
-          color: #1f2937;
-          line-height: 1.2;
-        }
-        
-        .features-section {
-          background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-        }
-        
-        .feature-card {
-          transition: all 0.4s ease;
-          border: 1px solid #e5e7eb;
-        }
-        
-        .feature-card:hover {
-          transform: translateY(-8px);
-          box-shadow: var(--shadow-hover);
-          border-color: #3b82f6;
-        }
-        
-        .shadow-hover {
-          box-shadow: var(--shadow-soft);
-        }
-        
-        .destination-card {
-          transition: all 0.4s ease;
-          border: 1px solid #e5e7eb;
-        }
-        
-        .destination-card:hover {
-          transform: translateY(-8px);
-          box-shadow: var(--shadow-hover);
-        }
-        
-        .destination-image {
-          transition: transform 0.4s ease;
-        }
-        
-        .destination-card:hover .destination-image {
-          transform: scale(1.05);
-        }
-        
-        .card-overlay {
-          background: linear-gradient(transparent, rgba(0,0,0,0.7));
-        }
-        
-        .cta-section {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .cta-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-          opacity: 0.3;
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 1.2s ease-out;
-        }
-        
-        .animate-bounce {
-          animation: bounce 2s infinite;
-        }
-        
-        @keyframes fadeIn {
-          from { 
-            opacity: 0; 
-            transform: translateY(40px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
-        
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% { 
-            transform: translateY(0); 
-          }
-          40% { 
-            transform: translateY(-12px); 
-          }
-          60% { 
-            transform: translateY(-6px); 
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% { 
-            transform: translateY(0px) rotate(0deg); 
-          }
-          50% { 
-            transform: translateY(-20px) rotate(180deg); 
-          }
-        }
-        
-        .counter {
-          font-size: 2rem;
-        }
-        
-        .backdrop-blur {
-          backdrop-filter: blur(10px);
-        }
-        
-        @media (max-width: 768px) {
-          .hero-title {
-            font-size: 2.5rem;
-          }
-          
-          .section-title {
-            font-size: 2rem;
-          }
-          
-          .py-6 {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-          }
-          
-          .floating-circle {
-            display: none;
-          }
-        }
-      `}</style>
     </div>
   );
 };
