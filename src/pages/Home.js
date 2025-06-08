@@ -13,7 +13,37 @@ const Home = () => {
   const getDestinasi = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/destinasi');
-      setDestinasi(response.data.slice(0, 6)); // Ambil 6 destinasi terbaru
+      
+      // Ambil data ulasan untuk setiap destinasi
+      const destinasiWithRatings = await Promise.all(response.data.slice(0, 6).map(async (item) => {
+        try {
+          const ulasanResponse = await axios.get(`http://localhost:5000/api/ulasan/destinasi/${item.id_destinasi}`);
+          const ulasanData = ulasanResponse.data;
+          
+          // Hitung rating rata-rata
+          let totalRating = 0;
+          ulasanData.forEach(ulasan => {
+            totalRating += ulasan.penilaian;
+          });
+          
+          const ratingRataRata = ulasanData.length > 0 ? (totalRating / ulasanData.length).toFixed(1) : '0.0';
+          
+          return {
+            ...item,
+            rating_rata_rata: ratingRataRata,
+            jumlah_ulasan: ulasanData.length
+          };
+        } catch (error) {
+          console.log(`Error fetching reviews for destinasi ${item.id_destinasi}:`, error);
+          return {
+            ...item,
+            rating_rata_rata: '0.0',
+            jumlah_ulasan: 0
+          };
+        }
+      }));
+      
+      setDestinasi(destinasiWithRatings);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -203,7 +233,7 @@ const Home = () => {
                             <i key={i} className="fa-solid fa-star text-yellow-500 text-sm"></i>
                           ))}
                         </div>
-                        <small className="text-gray-500 font-medium">(4.8)</small>
+                        <small className="text-gray-500 font-medium">({item.rating_rata_rata})</small>
                       </div>
                       <Link 
                         to={`/destinasi/${item.id_destinasi}`} 

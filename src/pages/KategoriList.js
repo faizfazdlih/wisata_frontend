@@ -5,9 +5,17 @@ import { Link } from 'react-router-dom';
 const KategoriList = () => {
   const [kategori, setKategori] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    total_destinasi: 0,
+    rating_rata_rata: '0.0',
+    jumlah_ulasan: 0
+  });
+  const [destinasiPerKategori, setDestinasiPerKategori] = useState({});
+  const [ratingPerKategori, setRatingPerKategori] = useState({});
 
   useEffect(() => {
     getKategori();
+    getStats();
   }, []);
 
   const getKategori = async () => {
@@ -18,6 +26,33 @@ const KategoriList = () => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+    }
+  };
+
+  const getStats = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/destinasi/stats');
+      setStats({
+        total_destinasi: response.data.total_destinasi,
+        rating_rata_rata: response.data.rating_rata_rata,
+        jumlah_ulasan: response.data.jumlah_ulasan
+      });
+      
+      // Buat objek untuk menyimpan jumlah destinasi per kategori
+      const perKategori = {};
+      response.data.destinasi_per_kategori.forEach(item => {
+        perKategori[item.id_kategori] = item.jumlah;
+      });
+      setDestinasiPerKategori(perKategori);
+      
+      // Buat objek untuk menyimpan rating per kategori
+      const perRating = {};
+      response.data.rating_per_kategori.forEach(item => {
+        perRating[item.id_kategori] = item.rating_rata_rata;
+      });
+      setRatingPerKategori(perRating);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -101,11 +136,11 @@ const KategoriList = () => {
               <div className="text-gray-600 font-medium">Kategori Tersedia</div>
             </div>
             <div className="p-4">
-              <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">{stats.total_destinasi}+</div>
               <div className="text-gray-600 font-medium">Destinasi</div>
             </div>
             <div className="p-4">
-              <div className="text-3xl font-bold text-red-600 mb-2">4.8</div>
+              <div className="text-3xl font-bold text-red-600 mb-2">{stats.rating_rata_rata}</div>
               <div className="text-gray-600 font-medium">Rating Rata-rata</div>
             </div>
           </div>
@@ -170,7 +205,7 @@ const KategoriList = () => {
                           <div className="flex items-center space-x-4">
                             <div className="flex items-center space-x-1">
                               <i className="fa-solid fa-star text-yellow-500"></i>
-                              <span className="text-sm font-medium text-gray-600">4.8</span>
+                              <span className="text-sm font-medium text-gray-600">{ratingPerKategori[item.id_kategori] || '0.0'}</span>
                             </div>
                             <div className="flex items-center space-x-1">
                               <i className="fa-solid fa-map-location-dot text-gray-400"></i>
@@ -178,7 +213,7 @@ const KategoriList = () => {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-nature-600">25+</div>
+                            <div className="text-2xl font-bold text-nature-600">{destinasiPerKategori[item.id_kategori] || 0}+</div>
                             <div className="text-xs text-gray-500">Destinasi</div>
                           </div>
                         </div>
