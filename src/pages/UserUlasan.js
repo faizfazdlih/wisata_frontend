@@ -34,7 +34,7 @@ const UserUlasan = () => {
 
   const handleHapusUlasan = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/ulasan/${id}`);
+      await axios.delete(`http://localhost:5000/api/ulasan/user/${id}`);
       getUlasan();
       setMessage({ text: 'Ulasan berhasil dihapus', type: 'success' });
     } catch (error) {

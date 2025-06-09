@@ -196,7 +196,7 @@ const Navbar = () => {
                     </g>
                   </svg>
                 <span className="text-xl font-bold text-nature-500">
-                  Touch Some Grass
+                  ULIN
                 </span>
               </Link>
             </div>

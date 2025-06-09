@@ -5,9 +5,17 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const [destinasi, setDestinasi] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
   useEffect(() => {
     getDestinasi();
+    
+    // Trigger hero animation setelah component mount
+    const timer = setTimeout(() => {
+      setHeroLoaded(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const getDestinasi = async () => {
@@ -53,40 +61,68 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Section */}
+      {/* Hero Section dengan Animasi */}
       <section className="relative overflow-hidden">
         <div            
-          className="absolute inset-0 w-full h-full"           
+          className={`absolute inset-0 w-full h-full transition-all duration-2000 ease-out ${
+            heroLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-70'
+          }`}           
           style={{             
             background: 'linear-gradient(135deg, rgba(74, 107, 74, 0.85) 0%, rgba(120, 142, 89, 0.85) 50%, rgba(221, 221, 221, 0.85) 100%), url("https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover',             
             minHeight: '100vh'           
           }}         
         />
         
-        {/* Floating Elements */}
+        {/* Enhanced Floating Elements dengan Animasi */}
         <div className="absolute inset-0 w-full h-full pointer-events-none">
-          <div className="absolute w-24 h-24 bg-white bg-opacity-10 rounded-full top-1/5 right-1/10 animate-pulse"></div>
-          <div className="absolute w-16 h-16 bg-white bg-opacity-10 rounded-full top-3/5 right-1/5 animate-pulse delay-1000"></div>
-          <div className="absolute w-20 h-20 bg-white bg-opacity-10 rounded-full top-2/5 right-5 animate-pulse delay-2000"></div>
+          <div className={`absolute w-24 h-24 bg-white bg-opacity-10 rounded-full top-1/5 right-1/10 animate-pulse transition-all duration-1500 ease-out ${
+            heroLoaded ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'
+          }`}></div>
+          <div className={`absolute w-16 h-16 bg-white bg-opacity-10 rounded-full top-3/5 right-1/5 animate-pulse delay-1000 transition-all duration-1500 ease-out ${
+            heroLoaded ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'
+          }`} style={{ transitionDelay: '200ms' }}></div>
+          <div className={`absolute w-20 h-20 bg-white bg-opacity-10 rounded-full top-2/5 right-5 animate-pulse delay-2000 transition-all duration-1500 ease-out ${
+            heroLoaded ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'
+          }`} style={{ transitionDelay: '400ms' }}></div>
+          
+          {/* Tambahan partikel dekoratif */}
+          <div className={`absolute w-6 h-6 bg-yellow-400 bg-opacity-20 rounded-full top-1/4 left-1/4 animate-bounce transition-all duration-2000 ease-out ${
+            heroLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`} style={{ transitionDelay: '600ms' }}></div>
+          <div className={`absolute w-8 h-8 bg-yellow-400 bg-opacity-20 rounded-full top-3/4 left-1/6 animate-bounce delay-500 transition-all duration-2000 ease-out ${
+            heroLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`} style={{ transitionDelay: '800ms' }}></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center min-h-screen">
             <div className="w-full lg:w-2/3 xl:w-3/5">
               <div className="text-white py-20">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                {/* Animated Title */}
+                <h1 className={`text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight transition-all duration-1500 ease-out ${
+                  heroLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                }`}>
                   Jelajahi Keindahan
-                  <span className="block text-nature-200">Wisata Indonesia</span>
+                  <span className={`block text-nature-200 transition-all duration-1500 ease-out ${
+                    heroLoaded ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
+                  }`} style={{ transitionDelay: '300ms' }}>Wisata Indonesia</span>
                 </h1>
                 
-                <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed max-w-2xl">
+                {/* Animated Subtitle */}
+                <p className={`text-xl md:text-2xl mb-8 opacity-90 leading-relaxed max-w-2xl transition-all duration-1500 ease-out ${
+                  heroLoaded ? 'translate-y-0 opacity-90' : 'translate-y-10 opacity-0'
+                }`} style={{ transitionDelay: '600ms' }}>
                   Temukan destinasi wisata lokal terbaik di Indonesia dengan panduan lengkap, 
                   ulasan terpercaya, dan pengalaman tak terlupakan yang menanti Anda.
                 </p>
-                <div className="flex flex-wrap gap-4 mb-8">
+                
+                {/* Animated Buttons */}
+                <div className={`flex flex-wrap gap-4 mb-8 transition-all duration-1500 ease-out ${
+                  heroLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                }`} style={{ transitionDelay: '900ms' }}>
                   <Link 
                     to="/destinasi" 
-                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline"
+                    className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline animate-pulse hover:animate-none"
                   >
                     <i className="fa-solid fa-compass text-yellow-400"></i>
                     <span>Jelajahi Sekarang</span>
@@ -104,14 +140,28 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Enhanced Scroll Indicator */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6">
+        {/* Enhanced Scroll Indicator dengan Animasi */}
+        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 transition-all duration-1500 ease-out ${
+          heroLoaded ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
+        }`} style={{ transitionDelay: '1200ms' }}>
           <div className="text-white text-center">
             <small className="block mb-2 opacity-75 font-medium">Scroll untuk melihat lebih banyak</small>
             <div className="animate-bounce">
               <i className="fa-solid fa-chevron-down text-2xl"></i>
             </div>
           </div>
+        </div>
+        
+        {/* Tambahan Overlay Pattern untuk efek visual */}
+        <div className={`absolute inset-0 pointer-events-none transition-opacity duration-2000 ${
+          heroLoaded ? 'opacity-20' : 'opacity-0'
+        }`}>
+          <div className="w-full h-full" style={{
+            backgroundImage: `radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                             radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                             radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '100px 100px, 150px 150px, 200px 200px'
+          }}></div>
         </div>
       </section>
 

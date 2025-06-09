@@ -248,7 +248,9 @@ const AdminNavbar = () => {
                   className="flex items-center space-x-3 text-gray-600 hover:text-nature-500 transition-colors duration-300 focus:outline-none"
                 >
                   <div className="w-8 h-8 bg-nature-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-semibold">{currentUser?.nama?.charAt(0) || 'A'}</span>
+                    <span className="text-white text-sm font-semibold">
+                      <i className="fas fa-user"></i>
+                    </span>
                   </div>
                   <span className="text-sm">Hi, {currentUser?.nama || 'Admin'}</span>
                   <i className={`fa-solid fa-chevron-down text-xs transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`}></i>

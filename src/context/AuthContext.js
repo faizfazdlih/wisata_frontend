@@ -64,14 +64,14 @@ export const AuthProvider = ({ children }) => {
     
     const updateProfile = async (userData) => {
         try {
-            await axios.patch(`http://localhost:5000/api/pengguna/${currentUser.id_pengguna}`, userData);
+            const response = await axios.patch('http://localhost:5000/api/profile', userData);
             
             // Update user di state dan localStorage
             const updatedUser = { ...currentUser, ...userData };
             setCurrentUser(updatedUser);
             localStorage.setItem('user', JSON.stringify(updatedUser));
             
-            return { success: true };
+            return { success: true, message: response.data.message };
         } catch (error) {
             return { 
                 success: false, 
@@ -80,8 +80,21 @@ export const AuthProvider = ({ children }) => {
         }
     };
     
+    const deleteAccount = async () => {
+        try {
+            await axios.delete('http://localhost:5000/api/profile');
+            logout(); // Logout setelah akun dihapus
+            return { success: true, message: 'Akun berhasil dihapus' };
+        } catch (error) {
+            return { 
+                success: false, 
+                message: error.response?.data?.message || 'Terjadi kesalahan saat menghapus akun'
+            };
+        }
+    };
+    
     return (
-        <AuthContext.Provider value={{ currentUser, login, register, logout, updateProfile, loading }}>
+        <AuthContext.Provider value={{ currentUser, login, register, logout, updateProfile, deleteAccount, loading }}>
             {children}
         </AuthContext.Provider>
     );

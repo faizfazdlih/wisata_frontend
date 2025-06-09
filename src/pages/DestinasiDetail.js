@@ -248,7 +248,7 @@ const DestinasiDetail = () => {
                 ) : (
                   <Link 
                     to="/login" 
-                    className="flex items-center px-6 py-3 bg-white border-2 border-nature-600 text-nature-600 hover:bg-nature-600 hover:text-white rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    className="flex items-center px-6 py-3 border-2 border-nature-600 text-nature-600 hover:bg-nature-600 hover:text-white rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg no-underline"
                   >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -256,13 +256,6 @@ const DestinasiDetail = () => {
                     Tambah ke Favorit
                   </Link>
                 )}
-                
-                <button className="flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                  </svg>
-                  Bagikan
-                </button>
               </div>
             </div>
           </div>
@@ -422,7 +415,7 @@ const DestinasiDetail = () => {
         ) : (
           <div className="bg-gradient-to-br from-nature-50 to-purple-50 rounded-3xl shadow-xl p-8">
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-nature-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -434,7 +427,7 @@ const DestinasiDetail = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link 
                   to="/login" 
-                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-nature-600 to-purple-600 hover:from-nature-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-nature-500 to-nature-600 hover:from-nature-500 hover:to-nature-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg no-underline"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -443,7 +436,7 @@ const DestinasiDetail = () => {
                 </Link>
                 <Link 
                   to="/register" 
-                  className="inline-flex items-center justify-center px-8 py-3 bg-white border-2 border-nature-600 text-nature-600 hover:bg-nature-600 hover:text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="inline-flex items-center justify-center px-8 py-3 border-2 border-nature-600 text-nature-600 hover:bg-nature-500 hover:text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg no-underline"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
