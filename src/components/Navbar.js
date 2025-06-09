@@ -245,7 +245,7 @@ const Navbar = () => {
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-nature-500 hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
                       >
                         <i className="fa-solid fa-user text-sm"></i>
-                        <span>Dashboard</span>
+                        <span>Profil</span>
                       </button>
                       <button
                         onClick={handleUlasan}

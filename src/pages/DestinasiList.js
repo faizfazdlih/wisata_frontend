@@ -56,7 +56,20 @@ const DestinasiList = () => {
         }
       }));
       
-      setDestinasi(destinasiWithRatings);
+      // Urutkan destinasi berdasarkan rating (tertinggi ke terendah)
+      const sortedDestinasi = destinasiWithRatings.sort((a, b) => {
+        const ratingA = parseFloat(a.rating_rata_rata);
+        const ratingB = parseFloat(b.rating_rata_rata);
+        
+        // Jika rating sama, urutkan berdasarkan jumlah ulasan
+        if (ratingA === ratingB) {
+          return b.jumlah_ulasan - a.jumlah_ulasan;
+        }
+        
+        return ratingB - ratingA;
+      });
+      
+      setDestinasi(sortedDestinasi);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -154,7 +167,7 @@ const DestinasiList = () => {
           {/* Filter Summary */}
           <div className="mt-6 flex flex-wrap items-center gap-4">
             <span className="text-gray-600 font-medium">
-              Menampilkan {filteredDestinasi.length} dari {destinasi.length} destinasi
+              Menampilkan {filteredDestinasi.length} dari {destinasi.length} destinasi (diurutkan berdasarkan rating)
             </span>
             {selectedKategori && (
               <span className="bg-nature-100 text-nature-700 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
@@ -197,6 +210,16 @@ const DestinasiList = () => {
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
                   {filteredDestinasi.map((item, index) => (
                     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100 group" key={item.id_destinasi}>
+                      {/* Badge untuk destinasi dengan rating tinggi */}
+                      {parseFloat(item.rating_rata_rata) >= 4.5 && (
+                        <div className="absolute top-4 left-4 z-10">
+                          <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1">
+                            <i className="fa-solid fa-crown"></i>
+                            <span>Populer</span>
+                          </span>
+                        </div>
+                      )}
+                      
                       <div className="relative overflow-hidden">
                         <img 
                           src={item.url_gambar || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'} 
@@ -238,7 +261,9 @@ const DestinasiList = () => {
                                 <i key={i} className={`fa-${i < Math.floor(item.rating_rata_rata || 0) ? 'solid' : 'regular'} fa-star text-yellow-500 text-sm`}></i>
                               ))}
                             </div>
-                            <small className="text-gray-500 font-medium">({item.rating_rata_rata || '0.0'})</small>
+                            <small className="text-gray-500 font-medium">
+                              ({item.rating_rata_rata || '0.0'}) • {item.jumlah_ulasan} ulasan
+                            </small>
                           </div>
                           <Link 
                             to={`/destinasi/${item.id_destinasi}`} 

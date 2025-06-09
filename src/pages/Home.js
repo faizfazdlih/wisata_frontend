@@ -20,38 +20,34 @@ const Home = () => {
 
   const getDestinasi = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/destinasi');
+      // Menggunakan endpoint getRatingTertinggi yang sudah ada
+      const response = await axios.get('http://localhost:5000/api/ulasan/statistik/rating');
       
-      // Ambil data ulasan untuk setiap destinasi
-      const destinasiWithRatings = await Promise.all(response.data.slice(0, 6).map(async (item) => {
+      // Ambil data destinasi lengkap untuk setiap destinasi dengan rating tertinggi
+      const destinasiWithRatings = await Promise.all(response.data.map(async (item) => {
         try {
+          // Ambil detail destinasi
+          const destinasiResponse = await axios.get(`http://localhost:5000/api/destinasi/${item.id_destinasi}`);
+          const destinasiData = destinasiResponse.data;
+          
+          // Ambil jumlah ulasan
           const ulasanResponse = await axios.get(`http://localhost:5000/api/ulasan/destinasi/${item.id_destinasi}`);
-          const ulasanData = ulasanResponse.data;
-          
-          // Hitung rating rata-rata
-          let totalRating = 0;
-          ulasanData.forEach(ulasan => {
-            totalRating += ulasan.penilaian;
-          });
-          
-          const ratingRataRata = ulasanData.length > 0 ? (totalRating / ulasanData.length).toFixed(1) : '0.0';
           
           return {
-            ...item,
-            rating_rata_rata: ratingRataRata,
-            jumlah_ulasan: ulasanData.length
+            ...destinasiData,
+            rating_rata_rata: parseFloat(item.rata_rata_rating).toFixed(1),
+            jumlah_ulasan: ulasanResponse.data.length
           };
         } catch (error) {
-          console.log(`Error fetching reviews for destinasi ${item.id_destinasi}:`, error);
-          return {
-            ...item,
-            rating_rata_rata: '0.0',
-            jumlah_ulasan: 0
-          };
+          console.log(`Error fetching details for destinasi ${item.id_destinasi}:`, error);
+          return null;
         }
       }));
       
-      setDestinasi(destinasiWithRatings);
+      // Filter out any null values from failed requests
+      const filteredDestinasi = destinasiWithRatings.filter(item => item !== null);
+      
+      setDestinasi(filteredDestinasi);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -260,8 +256,8 @@ const Home = () => {
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-nature-500 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
-                        <i className="fa-solid fa-trophy"></i>
-                        <span>#{index + 1} Populer</span>
+                        <i className="fa-solid fa-star text-yellow-400"></i>
+                        <span>Rating {item.rating_rata_rata}</span>
                       </span>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -280,7 +276,10 @@ const Home = () => {
                       <div className="flex items-center space-x-2">
                         <div className="flex space-x-1">
                           {[...Array(5)].map((_, i) => (
-                            <i key={i} className="fa-solid fa-star text-yellow-500 text-sm"></i>
+                            <i 
+                              key={i} 
+                              className={`fa-${i < Math.round(parseFloat(item.rating_rata_rata)) ? 'solid' : 'regular'} fa-star text-yellow-500 text-sm`}
+                            ></i>
                           ))}
                         </div>
                         <small className="text-gray-500 font-medium">({item.rating_rata_rata})</small>
