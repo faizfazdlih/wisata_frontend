@@ -236,7 +236,7 @@ const Home = () => {
               </p>
             </div>
             <div className="mt-8 lg:mt-0">
-              <Link to="/destinasi" className="inline-flex items-center space-x-2 bg-white hover:bg-gray-50 text-nature-500 hover:text-nature-600 border-2 border-nature-500 hover:border-nature-600 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl no-underline">
+              <Link to="/destinasi" className="bg-nature-500 hover:bg-nature-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2 no-underline">
                 <span>Lihat Semua</span>
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
@@ -319,7 +319,7 @@ const Home = () => {
               </p>
             </div>
             <div className="mt-8 lg:mt-0">
-              <Link to="/register" className="inline-flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 no-underline">
+              <Link to="/register" className="inline-flex items-center space-x-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 no-underline">
                 <i className="fa-solid fa-user-plus"></i>
                 <span>Daftar Sekarang</span>
               </Link>

@@ -260,14 +260,6 @@ const AdminNavbar = () => {
                 {isProfileOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50 animate-fade-in">
                     <button
-                      onClick={handleProfile}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-nature-500 hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
-                    >
-                      <i className="fa-solid fa-user text-sm"></i>
-                      <span>Profile</span>
-                    </button>
-                    <div className="border-t border-gray-200 my-1"></div>
-                    <button
                       onClick={() => setShowLogoutModal(true)}
                       className="w-full text-left px-4 py-2 text-sm text-red-500 hover:text-red-600 hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
                     >
@@ -371,9 +363,9 @@ const AdminNavbar = () => {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-200"
+                className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-200"
               >
-                Ya, Logout
+                Logout
               </button>
               <button
                 type="button"

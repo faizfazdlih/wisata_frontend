@@ -302,7 +302,7 @@ const DestinasiList = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Link 
                 to="/kategori" 
-                className="bg-white hover:bg-gray-100 text-nature-500 hover:text-nature-600 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 flex items-center space-x-2 no-underline"
+                className="bg-white hover:bg-gray-100 text-nature-500 hover:text-nature-600 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 flex items-center space-x-2 no-underline"
               >
                 <i className="fa-solid fa-list"></i>
                 <span>Lihat Semua Kategori</span>
